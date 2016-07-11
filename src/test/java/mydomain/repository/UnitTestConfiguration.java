@@ -16,7 +16,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 @EnableJpaRepositories(basePackages = "mydomain.repository")
 public class UnitTestConfiguration {
-  
+
   @Bean
   DataSource dataSource() {
     BasicDataSource dataSource = new BasicDataSource();
@@ -25,18 +25,19 @@ public class UnitTestConfiguration {
     dataSource.setUsername("sa");
     return dataSource;
   }
-  
+
   @Bean
   LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
-    LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+    LocalContainerEntityManagerFactoryBean entityManagerFactory =
+        new LocalContainerEntityManagerFactoryBean();
     entityManagerFactory.setDataSource(dataSource);
     entityManagerFactory.setPackagesToScan("mydomain.repository");
     entityManagerFactory.setPersistenceProviderClass(PersistenceProviderImpl.class);
     entityManagerFactory.setPersistenceUnitName("MyTest");
-    //entityManagerFactory.setLoadTimeWeaver(new DefaultContextLoadTimeWeaver());
+    // entityManagerFactory.setLoadTimeWeaver(new DefaultContextLoadTimeWeaver());
     return entityManagerFactory;
   }
-  
+
   @Bean
   @DependsOn("entityManagerFactory")
   PlatformTransactionManager transactionManager(DataSource dataSource, EntityManagerFactory emf) {

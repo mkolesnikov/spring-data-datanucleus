@@ -10,7 +10,7 @@ import mydomain.model.Person;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = UnitTestConfiguration.class)
-public class PersionRepositoryTest {
+public class PersonRepositoryTest {
   @Autowired
   PersonRepository personDao;
 
